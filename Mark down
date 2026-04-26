@@ -1,0 +1,22 @@
+markdown
+# E-commerce Price Scraper
+
+This project is a Python-based web scraper that extracts product data from an e-commerce website.
+
+## Features
+- Scrapes product names, prices, and availability
+- Saves data into CSV format
+- Easy to modify for other websites
+
+## Tools Used
+- Python
+- BeautifulSoup
+- Requests
+- Pandas
+
+## How to Run
+1. Install dependencies:
+   pip install requests beautifulsoup4 pandas
+
+2. Run the script:
+   python scraper.py
