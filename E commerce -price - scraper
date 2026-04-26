@@ -1,0 +1,39 @@
+pip install requests beautifulsoup4 pandas
+
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+# Target website (safe demo site for scraping practice)
+URL = "https://books.toscrape.com/"
+
+headers = {
+    "User-Agent": "Mozilla/5.0"
+}
+
+response = requests.get(URL, headers=headers)
+soup = BeautifulSoup(response.text, "html.parser")
+
+products = []
+
+# Find all product containers
+items = soup.find_all("article", class_="product_pod")
+
+for item in items:
+    name = item.h3.a["title"]
+    price = item.find("p", class_="price_color").text
+    availability = item.find("p", class_="instock availability").text.strip()
+
+    products.append({
+        "Name": name,
+        "Price": price,
+        "Availability": availability
+    })
+
+# Convert to DataFrame
+df = pd.DataFrame(products)
+
+# Save to CSV
+df.to_csv("products.csv", index=False)
+
+print(" Data saved to products.csv")
